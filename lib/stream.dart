@@ -7,6 +7,6 @@ Stream<int> streamFunAsync() async* {
           Uri.parse('https://www.randomnumberapi.com/api/v1.0/randomnumber'));
       var asnwer = jsonDecode(rand.body);
       yield asnwer[0];
-      await Future.delayed(const Duration(seconds: 30));
+      await Future.delayed(const Duration(minutes: 5));
     }
   }

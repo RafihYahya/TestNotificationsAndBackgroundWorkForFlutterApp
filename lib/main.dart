@@ -5,10 +5,12 @@ import 'package:testing_notif/workmanager.dart';
 
 
 
+
 void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // Required for Android platform specific initialization
-    WorkManager.startWorkManager();
+   // WorkManager.startWorkManager();
+    LocalNotifications.initialize();
   runApp(const MainApp());
 }
 
@@ -28,13 +30,20 @@ class _MainAppState extends State<MainApp> {
   void initState() {
     super.initState();
     streamFunAsync().listen((event) async {
-      LocalNotifications.displayNotifs(event);
+      LocalNotifications.displayNotifs(event,'Random Number');
       setState(() {
         myNumber.add(event);
       });
     });
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   
+    WorkManager.startWorkManager();
   }
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///
+  ///
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
