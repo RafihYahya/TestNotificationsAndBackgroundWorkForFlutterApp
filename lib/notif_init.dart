@@ -7,3 +7,9 @@ const initializationSettingsAndroid =
       InitializationSettings(android: initializationSettingsAndroid);
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
+
+
+void displayNotifs(int id, NotificationDetails notifs) async {
+  await flutterLocalNotificationsPlugin.show(
+      id, 'Random Num', id.toString(), notifs);
+}
