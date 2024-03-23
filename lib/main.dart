@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:testing_notif/notif_init.dart';
 import 'package:testing_notif/stream.dart';
 import 'package:testing_notif/workmanager.dart';
@@ -9,8 +8,7 @@ import 'package:testing_notif/workmanager.dart';
 void main() async {
   WidgetsFlutterBinding
       .ensureInitialized(); // Required for Android platform specific initialization
-  flutterLocalNotificationsPlugin.initialize(initializationSettings);
-  startWorkManager();
+    WorkManager.startWorkManager();
   runApp(const MainApp());
 }
 
@@ -30,10 +28,7 @@ class _MainAppState extends State<MainApp> {
   void initState() {
     super.initState();
     streamFunAsync().listen((event) async {
-      final notificationDetails = NotificationDetails(
-          android: AndroidNotificationDetails(event.toString(), 'channelName',
-              importance: Importance.max, priority: Priority.max));
-      displayNotifs(event, notificationDetails);
+      LocalNotifications.displayNotifs(event);
       setState(() {
         myNumber.add(event);
       });
